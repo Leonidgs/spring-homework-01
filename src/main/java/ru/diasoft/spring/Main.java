@@ -1,7 +1,7 @@
-package org.example;
+package ru.diasoft.spring;
 
-import org.example.service.QuestionService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import ru.diasoft.spring.service.QuestionService;
 
 public class Main {
     public static void main(String[] args) {

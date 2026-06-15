@@ -1,6 +1,6 @@
-package org.example.dao;
+package ru.diasoft.spring.dao;
 
-import org.example.domain.Question;
+import ru.diasoft.spring.domain.Question;
 
 import java.util.List;
 

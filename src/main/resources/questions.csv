@@ -1,5 +1,5 @@
-What is the capital of France?,Paris,London,Berlin,Madrid
-How many planets are in the Solar System?,8,7,9,10
-What is 2 + 2?,4,3,5,6
-Who wrote Romeo and Juliet?,William Shakespeare,Charles Dickens,Mark Twain,Leo Tolstoy
-What is the chemical symbol for water?,H2O,CO2,O2,NaCl
+Какой язык программирования был создан в Sun Microsystems в 1995 году?,Java,Python,C++,Ruby
+Что означает аббревиатура SQL?,Structured Query Language,Simple Query Logic,Sequential Query Language,Standard Query List
+Какой контейнер управляет бинами в Spring?,IoC-контейнер,Servlet-контейнер,EJB-контейнер,OSGi-контейнер
+Какой паттерн используется для внедрения зависимостей через конструктор?,Dependency Injection,Singleton,Factory,Observer
+Сколько примитивных типов данных в Java?,8,6,10,4

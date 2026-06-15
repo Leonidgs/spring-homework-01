@@ -1,4 +1,4 @@
-package org.example.domain;
+package ru.diasoft.spring.domain;
 
 import java.util.List;
 

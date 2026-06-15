@@ -1,7 +1,7 @@
-package org.example.service;
+package ru.diasoft.spring.service;
 
-import org.example.dao.QuestionDao;
-import org.example.domain.Question;
+import ru.diasoft.spring.dao.QuestionDao;
+import ru.diasoft.spring.domain.Question;
 
 import java.util.List;
 
