@@ -1,11 +1,14 @@
 package org.example;
 
+import org.example.service.QuestionService;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 public class Main {
     public static void main(String[] args) {
-        System.out.printf("Hello and welcome!");
-
-        for (int i = 1; i <= 5; i++) {
-            System.out.println("i = " + i);
-        }
+        ClassPathXmlApplicationContext context =
+                new ClassPathXmlApplicationContext("spring-context.xml");
+        QuestionService questionService = context.getBean("questionService", QuestionService.class);
+        questionService.executeTest();
+        context.close();
     }
 }
