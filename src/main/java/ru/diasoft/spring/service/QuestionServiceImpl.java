@@ -6,70 +6,72 @@ import ru.diasoft.spring.dao.QuestionDao;
 import ru.diasoft.spring.domain.Question;
 
 import java.util.List;
-import java.util.Scanner;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionDao dao;
+    private final IOService ioService;
     private final int passingScore;
 
-    public QuestionServiceImpl(QuestionDao dao, @Value("${passing.score}") int passingScore) {
+    public QuestionServiceImpl(QuestionDao dao, IOService ioService, @Value("${passing.score}") int passingScore) {
         this.dao = dao;
+        this.ioService = ioService;
         this.passingScore = passingScore;
     }
 
     @Override
     public void executeTest() {
-        Scanner scanner = new Scanner(System.in);
+        String firstName = ioService.readLineWithPrompt("Enter your first name:");
+        String lastName = ioService.readLineWithPrompt("Enter your last name:");
 
-        System.out.println("Enter your first name:");
-        String firstName = scanner.nextLine().trim();
-
-        System.out.println("Enter your last name:");
-        String lastName = scanner.nextLine().trim();
-
-        System.out.println("\nWelcome, " + firstName + " " + lastName + "!");
-        System.out.println("Please answer the following questions by entering the number of your choice.\n");
+        ioService.printLine("");
+        ioService.printLine("Welcome, " + firstName + " " + lastName + "!");
+        ioService.printLine("Please answer the following questions by entering the number of your choice.");
+        ioService.printLine("");
 
         List<Question> questions = dao.findAll();
         int correctCount = 0;
 
         for (int i = 0; i < questions.size(); i++) {
             Question question = questions.get(i);
-            System.out.println("Question " + (i + 1) + ": " + question.getText());
+            ioService.printLine("Question " + (i + 1) + ": " + question.getText());
             List<String> answers = question.getAnswers();
             for (int j = 0; j < answers.size(); j++) {
-                System.out.println("  " + (j + 1) + ". " + answers.get(j));
+                ioService.printLine("  " + (j + 1) + ". " + answers.get(j));
             }
 
-            System.out.print("Your answer: ");
-            int userAnswer;
-            try {
-                userAnswer = Integer.parseInt(scanner.nextLine().trim()) - 1;
-            } catch (NumberFormatException e) {
-                userAnswer = -1;
-            }
+            int userAnswer = readUserAnswer();
 
             if (userAnswer == question.getCorrectAnswerIndex()) {
                 correctCount++;
-                System.out.println("Correct!\n");
+                ioService.printLine("Correct!");
             } else {
-                System.out.println("Incorrect. The correct answer was: " +
+                ioService.printLine("Incorrect. The correct answer was: " +
                         (question.getCorrectAnswerIndex() + 1) + ". " +
-                        answers.get(question.getCorrectAnswerIndex()) + "\n");
+                        answers.get(question.getCorrectAnswerIndex()));
             }
+            ioService.printLine("");
         }
 
-        System.out.println("Test completed!");
-        System.out.println(firstName + " " + lastName + ", you answered " + correctCount + " out of " +
+        ioService.printLine("Test completed!");
+        ioService.printLine(firstName + " " + lastName + ", you answered " + correctCount + " out of " +
                 questions.size() + " questions correctly.");
 
         if (correctCount >= passingScore) {
-            System.out.println("Congratulations! You PASSED the test!");
+            ioService.printLine("Congratulations! You PASSED the test!");
         } else {
-            System.out.println("Sorry, you FAILED the test. You needed at least " + passingScore +
+            ioService.printLine("Sorry, you FAILED the test. You needed at least " + passingScore +
                     " correct answers to pass.");
+        }
+    }
+
+    private int readUserAnswer() {
+        String input = ioService.readLineWithPrompt("Your answer:");
+        try {
+            return Integer.parseInt(input.trim()) - 1;
+        } catch (NumberFormatException e) {
+            return -1;
         }
     }
 }
