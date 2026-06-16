@@ -15,10 +15,10 @@ class QuestionServiceImplTest {
     void executeTest_shouldCallFindAll() {
         QuestionDao mockDao = Mockito.mock(QuestionDao.class);
         when(mockDao.findAll()).thenReturn(List.of(
-                new Question("What is 2+2?", List.of("4", "3", "5"))
+                new Question("What is 2+2?", List.of("4", "3", "5"), 0)
         ));
 
-        QuestionServiceImpl service = new QuestionServiceImpl(mockDao);
+        QuestionServiceImpl service = new QuestionServiceImpl(mockDao, 1);
         service.executeTest();
 
         verify(mockDao, times(1)).findAll();

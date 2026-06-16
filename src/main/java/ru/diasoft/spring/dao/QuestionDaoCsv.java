@@ -1,5 +1,7 @@
 package ru.diasoft.spring.dao;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Repository;
 import ru.diasoft.spring.domain.Question;
 
 import java.io.BufferedReader;
@@ -9,11 +11,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class QuestionDaoCsv implements QuestionDao {
 
     private final String csvResourceName;
 
-    public QuestionDaoCsv(String csvResourceName) {
+    public QuestionDaoCsv(@Value("${questions.file}") String csvResourceName) {
         this.csvResourceName = csvResourceName;
     }
 
@@ -37,7 +40,7 @@ public class QuestionDaoCsv implements QuestionDao {
                 for (int i = 1; i < parts.length; i++) {
                     answers.add(parts[i].trim());
                 }
-                questions.add(new Question(text, answers));
+                questions.add(new Question(text, answers, 0));
             }
         } catch (Exception e) {
             throw new RuntimeException("Failed to read CSV resource: " + csvResourceName, e);

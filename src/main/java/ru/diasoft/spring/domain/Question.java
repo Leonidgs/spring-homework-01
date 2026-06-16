@@ -6,10 +6,12 @@ public class Question {
 
     private String text;
     private List<String> answers;
+    private int correctAnswerIndex;
 
-    public Question(String text, List<String> answers) {
+    public Question(String text, List<String> answers, int correctAnswerIndex) {
         this.text = text;
         this.answers = answers;
+        this.correctAnswerIndex = correctAnswerIndex;
     }
 
     public String getText() {
@@ -26,5 +28,13 @@ public class Question {
 
     public void setAnswers(List<String> answers) {
         this.answers = answers;
+    }
+
+    public int getCorrectAnswerIndex() {
+        return correctAnswerIndex;
+    }
+
+    public void setCorrectAnswerIndex(int correctAnswerIndex) {
+        this.correctAnswerIndex = correctAnswerIndex;
     }
 }
