@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Question {
 
-    private String text;
-    private List<String> answers;
+    private final String text;
+    private final List<String> answers;
     private int correctAnswerIndex;
 
     public Question(String text, List<String> answers, int correctAnswerIndex) {
@@ -18,16 +18,8 @@ public class Question {
         return text;
     }
 
-    public void setText(String text) {
-        this.text = text;
-    }
-
     public List<String> getAnswers() {
         return answers;
-    }
-
-    public void setAnswers(List<String> answers) {
-        this.answers = answers;
     }
 
     public int getCorrectAnswerIndex() {
